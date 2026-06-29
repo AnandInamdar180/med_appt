@@ -77,7 +77,7 @@ const Sign_Up = () => {
           setShowerr(json.error || "Registration failed.");
         }
       }
-    } } catch (error) {
+     } catch (error) {
         console.error("Registration Error:", error);
         console.error("Error Message:", error.message);
         console.error(error);
