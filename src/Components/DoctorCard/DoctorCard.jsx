@@ -10,11 +10,15 @@ const DoctorCard = ({
   profilePic,
 }) => {
   const [showForm, setShowForm] = useState(false);
+  const [appointment, setAppointment] = useState(null);
 
   const handleSubmit = (appointmentData) => {
-    console.log("Appointment Booked:", appointmentData);
-    alert("Appointment Booked Successfully!");
+    setAppointment(appointmentData);
     setShowForm(false);
+  };
+
+  const handleCancel = () => {
+    setAppointment(null);
   };
 
   return (
@@ -55,7 +59,7 @@ const DoctorCard = ({
             Ratings: {ratings}
           </div>
 
-          <div>
+          {!appointment ? (
             <button
               className="book-appointment-btn"
               onClick={() => setShowForm(true)}
@@ -63,7 +67,14 @@ const DoctorCard = ({
               <div>Book Appointment</div>
               <div>No Booking Fee</div>
             </button>
-          </div>
+          ) : (
+            <button
+              className="book-appointment-btn cancel-appointment"
+              onClick={handleCancel}
+            >
+              Cancel Appointment
+            </button>
+          )}
         </div>
       </div>
 
@@ -73,6 +84,28 @@ const DoctorCard = ({
           doctorSpeciality={speciality}
           onSubmit={handleSubmit}
         />
+      )}
+
+      {appointment && (
+        <div className="bookedInfo">
+          <h3>Appointment Booked!</h3>
+
+          <p>
+            <strong>Name:</strong> {appointment.name}
+          </p>
+
+          <p>
+            <strong>Phone:</strong> {appointment.phoneNumber}
+          </p>
+
+          <p>
+            <strong>Date:</strong> {appointment.appointmentDate}
+          </p>
+
+          <p>
+            <strong>Time:</strong> {appointment.appointmentTime}
+          </p>
+        </div>
       )}
     </div>
   );
