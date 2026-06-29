@@ -1,17 +1,28 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const token = sessionStorage.getItem("auth-token");
+  const email = sessionStorage.getItem("email");
+
+  const username = email ? email.split("@")[0] : "";
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
+  const logout = () => {
+    sessionStorage.clear();
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <nav>
-      {/* Logo */}
       <div className="nav__logo">
         <Link to="/">
           StayHealthy
@@ -38,12 +49,10 @@ const Navbar = () => {
         <span>.</span>
       </div>
 
-      {/* Mobile Menu Icon */}
       <div className="nav__icon" onClick={handleClick}>
         <i className={`fa ${isOpen ? "fa-times" : "fa-bars"}`}></i>
       </div>
 
-      {/* Navigation Links */}
       <ul className={`nav__links ${isOpen ? "active" : ""}`}>
         <li className="link">
           <Link to="/">Home</Link>
@@ -53,17 +62,35 @@ const Navbar = () => {
           <Link to="#">Appointments</Link>
         </li>
 
-        <li className="link">
-          <Link to="/signup">
-            <button className="btn1">Sign Up</button>
-          </Link>
-        </li>
+        {!token ? (
+          <>
+            <li className="link">
+              <Link to="/signup">
+                <button className="btn1">Sign Up</button>
+              </Link>
+            </li>
 
-        <li className="link">
-          <Link to="/login">
-            <button className="btn1">Login</button>
-          </Link>
-        </li>
+            <li className="link">
+              <Link to="/login">
+                <button className="btn1">Login</button>
+              </Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="link">
+              <span style={{ fontWeight: "bold" }}>
+                {username}
+              </span>
+            </li>
+
+            <li className="link">
+              <button className="btn1" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

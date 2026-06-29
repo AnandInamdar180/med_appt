@@ -1,52 +1,59 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../../config";
 
-function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+const Login = () => {
+  const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showerr, setShowerr] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const validate = () => {
-    let temp = {};
-
-    if (!/\S+@\S+\.\S+/.test(formData.email))
-      temp.email = "Enter a valid email address.";
-
-    if (!formData.password)
-      temp.password = "Password is required.";
-
-    setErrors(temp);
-
-    return Object.keys(temp).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const login = async (e) => {
     e.preventDefault();
 
-    if (validate()) {
-      alert("Login Successful!");
-      console.log(formData);
+    if (!email || !password) {
+      setShowerr("Please fill all fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const json = await response.json();
+
+      if (json.authtoken) {
+        sessionStorage.setItem("auth-token", json.authtoken);
+        sessionStorage.setItem("email", email);
+
+        navigate("/");
+        window.location.reload();
+      } else {
+        if (json.errors) {
+          setShowerr(json.errors[0].msg);
+        } else {
+          setShowerr(json.error || "Login failed.");
+        }
+      }
+    } catch (error) {
+      setShowerr("Unable to connect to server.");
     }
   };
 
-  const handleReset = () => {
-    setFormData({
-      email: "",
-      password: "",
-    });
-
-    setErrors({});
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setShowerr("");
   };
 
   return (
@@ -65,59 +72,50 @@ function Login() {
         </div>
 
         <div className="login-form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={login}>
 
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label>Email</label>
 
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                id="email"
                 className="form-control"
                 placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
               />
-
-              <small style={{ color: "red" }}>
-                {errors.email}
-              </small>
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label>Password</label>
 
               <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                id="password"
                 className="form-control"
                 placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
               />
-
-              <small style={{ color: "red" }}>
-                {errors.password}
-              </small>
             </div>
 
-            <div className="btn-group">
+            {showerr && (
+              <div style={{ color: "red", marginBottom: "10px" }}>
+                {showerr}
+              </div>
+            )}
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
+            <div className="btn-group">
+              <button type="submit" className="btn btn-primary">
                 Login
               </button>
 
               <button
                 type="button"
                 className="btn btn-danger"
-                onClick={handleReset}
+                onClick={resetForm}
               >
                 Reset
               </button>
-
             </div>
 
             <div className="login-text">
@@ -130,6 +128,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
