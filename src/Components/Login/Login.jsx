@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
@@ -8,18 +8,18 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showerr, setShowerr] = useState("");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("auth-token")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const login = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setShowerr("Please fill all fields.");
-      return;
-    }
-
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const Login = () => {
         }),
       });
 
-      const json = await response.json();
+      const json = await res.json();
 
       if (json.authtoken) {
         sessionStorage.setItem("auth-token", json.authtoken);
@@ -40,20 +40,15 @@ const Login = () => {
         window.location.reload();
       } else {
         if (json.errors) {
-          setShowerr(json.errors[0].msg);
+          json.errors.forEach((error) => alert(error.msg));
         } else {
-          setShowerr(json.error || "Login failed.");
+          alert(json.error);
         }
       }
     } catch (error) {
-      setShowerr("Unable to connect to server.");
+      console.log(error);
+      alert("Unable to connect to server.");
     }
-  };
-
-  const resetForm = () => {
-    setEmail("");
-    setPassword("");
-    setShowerr("");
   };
 
   return (
@@ -67,42 +62,43 @@ const Login = () => {
         <div className="login-text">
           Are you a new member?
           <span>
-            <Link to="/signup"> Sign Up Here</Link>
+            <Link to="/signup" style={{ color: "#2190FF" }}>
+              {" "}
+              Sign Up Here
+            </Link>
           </span>
         </div>
+
+        <br />
 
         <div className="login-form">
           <form onSubmit={login}>
 
             <div className="form-group">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
 
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
+                id="email"
                 className="form-control"
                 placeholder="Enter your email"
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
 
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
+                id="password"
                 className="form-control"
                 placeholder="Enter your password"
               />
             </div>
-
-            {showerr && (
-              <div style={{ color: "red", marginBottom: "10px" }}>
-                {showerr}
-              </div>
-            )}
 
             <div className="btn-group">
               <button type="submit" className="btn btn-primary">
@@ -110,9 +106,12 @@ const Login = () => {
               </button>
 
               <button
-                type="button"
+                type="reset"
                 className="btn btn-danger"
-                onClick={resetForm}
+                onClick={() => {
+                  setEmail("");
+                  setPassword("");
+                }}
               >
                 Reset
               </button>

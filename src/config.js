@@ -1,9 +1,7 @@
-export const API_URL =
-  window.location.hostname === "localhost"
-    ? "https://inamdaranand-8181.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
-    : "https://inamdaranand-8181.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai";
+const protocol = window.location.protocol;
+const hostname = window.location.hostname;
 
-console.log(
-  "API_URL :",
-  API_URL
-);
+// Replace only the frontend port with backend port
+export const API_URL = `${protocol}//${hostname.replace("-4173.", "-8181.")}`;
+
+console.log("API_URL:", API_URL);
