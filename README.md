@@ -1,16 +1,117 @@
-# React + Vite
+# 🏥 StayHealthy – Medical Appointment Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+StayHealthy is a React-based Medical Appointment Booking web application that allows patients to search for doctors, book appointments, consult doctors instantly, manage their profiles, submit reviews, and access medical reports through a clean and user-friendly interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User Registration and Login
+- Secure Authentication
+- Doctor Search
+- Appointment Booking
+- Instant Consultation
+- Notifications
+- Patient Profile Management
+- Edit Profile Details
+- Doctor Reviews and Ratings
+- Medical Reports (View & Download)
+- Responsive Navigation Bar
+- Search Engine Optimization (SEO)
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- Vite
+- React Router DOM
+- CSS3
+- JavaScript (ES6)
 
-## Expanding the Oxlint configuration
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+- bcrypt.js
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Project Structure
+
+```
+med_appt/
+├── public/
+├── server/
+├── src/
+│   ├── Components/
+│   ├── App.jsx
+│   └── main.jsx
+├── package.json
+└── README.md
+```
+
+## Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+```
+
+### Navigate to the project
+
+```bash
+cd med_appt
+```
+
+### Install frontend dependencies
+
+```bash
+npm install
+```
+
+### Install backend dependencies
+
+```bash
+cd server
+npm install
+```
+
+## Run the Application
+
+### Start the backend
+
+```bash
+cd server
+node index
+```
+
+### Start the frontend
+
+```bash
+npm run dev
+```
+
+The application will run at:
+
+```
+http://localhost:5173
+```
+
+Backend API:
+
+```
+http://localhost:8181
+```
+
+## SEO
+
+The application includes:
+
+- Meta Keywords
+- Meta Description
+- Responsive Design
+- Optimized HTML Structure
+
+## Author
+
+**Anand Inamdar**
+
+Frontend Development Capstone Project
