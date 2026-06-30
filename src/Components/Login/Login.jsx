@@ -30,7 +30,19 @@ const Login = () => {
         }),
       });
 
-      const json = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      const json = contentType.includes("application/json")
+        ? await res.json()
+        : null;
+
+      if (!res.ok) {
+        if (json?.errors) {
+          json.errors.forEach((error) => alert(error.msg));
+        } else {
+          alert(json?.error || "Login failed.");
+        }
+        return;
+      }
 
       if (json.authtoken) {
         sessionStorage.setItem("auth-token", json.authtoken);
@@ -39,15 +51,15 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } else {
-        if (json.errors) {
+        if (json?.errors) {
           json.errors.forEach((error) => alert(error.msg));
         } else {
-          alert(json.error);
+          alert(json?.error || "Login failed.");
         }
       }
     } catch (error) {
       console.log(error);
-      alert("Unable to connect to server.");
+      alert("Unable to connect to server. Please make sure the backend is running on port 8181.");
     }
   };
 

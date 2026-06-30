@@ -9,6 +9,7 @@ import InstantConsultation from "./Components/InstantConsultationBooking/Instant
 import BookingConsultation from "./Components/BookingConsultation";
 import ReviewFormApp from "./Components/ReviewForm/ReviewFormApp";
 import ProfileCard from "./Components/ProfileCard/ProfileCard";
+import ReportsLayout from "./Components/ReportsLayout/ReportsLayout";
 
 function App() {
   return (
@@ -40,6 +41,11 @@ function App() {
             <Route
               path="/profile"
               element={<ProfileCard />}
+            />
+
+            <Route
+              path="/reports"
+              element={<ReportsLayout />}
             />
           </Routes>
         </Notification>

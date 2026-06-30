@@ -15,7 +15,8 @@ const connectToMongo = async (retryCount) => {
         const nextRetryCount = count + 1;
 
         if (nextRetryCount >= MAX_RETRIES) {
-            throw new Error('Unable to connect to Mongo!');
+            console.error('Unable to connect to Mongo. Falling back to local file storage for auth.');
+            return false;
         }
 
         console.info(`Retrying, retry count: ${nextRetryCount}`)
@@ -25,4 +26,9 @@ const connectToMongo = async (retryCount) => {
     }
 };
 
-module.exports = connectToMongo;
+const isMongoConnected = () => mongoose.connection.readyState === 1;
+
+module.exports = {
+    connectToMongo,
+    isMongoConnected,
+};

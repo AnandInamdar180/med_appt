@@ -1,7 +1,29 @@
-const protocol = window.location.protocol;
-const hostname = window.location.hostname;
+const { protocol, hostname, port } = window.location;
 
-// Replace only the frontend port with backend port
-export const API_URL = `${protocol}//${hostname.replace("-4173.", "-8181.")}`;
+const envApiUrl = import.meta.env.VITE_API_URL?.trim();
 
-console.log("API_URL:", API_URL);
+const getApiUrl = () => {
+  if (envApiUrl) {
+    return envApiUrl.replace(/\/+$/, "");
+  }
+
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return `${protocol}//${hostname}:8181`;
+  }
+
+  if (port === "4173" || port === "5173") {
+    return `${protocol}//${hostname}:8181`;
+  }
+
+  if (hostname.includes("-4173.")) {
+    return `${protocol}//${hostname.replace("-4173.", "-8181.")}`;
+  }
+
+  if (hostname.includes("-5173.")) {
+    return `${protocol}//${hostname.replace("-5173.", "-8181.")}`;
+  }
+
+  return `${protocol}//${hostname}:8181`;
+};
+
+export const API_URL = getApiUrl();

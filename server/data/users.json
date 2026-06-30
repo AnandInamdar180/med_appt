@@ -1,0 +1,32 @@
+[
+  {
+    "id": "fa5a8c0c-8240-4b1a-8e16-6060aaf6479f",
+    "role": "Patient",
+    "email": "fallback-test@example.com",
+    "name": "Fallback Test",
+    "password": "hash",
+    "phone": "1234567890",
+    "createdAt": "2026-06-30T11:24:49.447Z",
+    "updatedAt": "2026-06-30T11:24:49.451Z"
+  },
+  {
+    "id": "d18678fb-db70-487d-9157-9612a4ad3c98",
+    "role": "Patient",
+    "email": "asdfg@gmail.com",
+    "name": "asdfgh",
+    "password": "$2a$10$KdGE8vmwj5uOfl0WdAd3c.S1uzFZTRMrnJ388bEnUaS7L/A4xqxJC",
+    "phone": "1234567890",
+    "createdAt": "2026-06-30T11:25:12.449Z",
+    "updatedAt": "2026-06-30T11:25:12.449Z"
+  },
+  {
+    "id": "4a71c7c8-f54e-47b3-a57e-d03283e6b585",
+    "role": "Patient",
+    "email": "inamdaranand6@gmail.com",
+    "name": "anand",
+    "password": "$2a$10$TA0jifZtczzZVfCcYlrpSuVBmDoJyJWP9Yt4TxXkET1VEJJazS/w2",
+    "phone": "1324569870",
+    "createdAt": "2026-06-30T11:29:05.970Z",
+    "updatedAt": "2026-06-30T11:29:05.970Z"
+  }
+]

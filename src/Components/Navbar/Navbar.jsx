@@ -9,7 +9,7 @@ const Navbar = () => {
   const token = sessionStorage.getItem("auth-token");
   const email = sessionStorage.getItem("email");
 
-  const username = email ? email.split("@")[0] : "";
+  const username = email ? email.split("@")[0] : "Profile";
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -19,6 +19,33 @@ const Navbar = () => {
     sessionStorage.clear();
     navigate("/");
     window.location.reload();
+  };
+
+  const handleDropdown = (e) => {
+    const value = e.target.value;
+
+    switch (value) {
+      case "profile":
+        navigate("/profile");
+        break;
+
+      case "reports":
+        navigate("/reports");
+        break;
+
+      case "reviews":
+        navigate("/reviews");
+        break;
+
+      case "logout":
+        logout();
+        break;
+
+      default:
+        break;
+    }
+
+    e.target.selectedIndex = 0;
   };
 
   return (
@@ -79,21 +106,15 @@ const Navbar = () => {
             <select
               className="profile-dropdown"
               defaultValue=""
-              onChange={(e) => {
-                if (e.target.value === "profile") {
-                  navigate("/profile");
-                }
-
-                if (e.target.value === "logout") {
-                  logout();
-                }
-              }}
+              onChange={handleDropdown}
             >
               <option value="" disabled>
                 {username}
               </option>
 
-              <option value="profile">Profile</option>
+              <option value="profile">Your Profile</option>
+              <option value="reports">Your Reports</option>
+              <option value="reviews">Reviews</option>
               <option value="logout">Logout</option>
             </select>
           </li>

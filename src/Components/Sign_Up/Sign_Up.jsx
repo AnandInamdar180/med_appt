@@ -60,7 +60,20 @@ const Sign_Up = () => {
         }),
       });
 
-      const json = await response.json();
+      const contentType = response.headers.get("content-type") || "";
+      const json = contentType.includes("application/json")
+        ? await response.json()
+        : null;
+
+      if (!response.ok) {
+        const validationErrors = json?.errors || json?.error;
+        if (Array.isArray(validationErrors) && validationErrors.length) {
+          setShowerr(validationErrors[0].msg);
+        } else {
+          setShowerr(json?.error || "Registration failed.");
+        }
+        return;
+      }
 
       if (json.authtoken) {
         sessionStorage.setItem("auth-token", json.authtoken);
@@ -71,19 +84,17 @@ const Sign_Up = () => {
         navigate("/");
         window.location.reload();
       } else {
-        if (json.errors) {
-          setShowerr(json.errors[0].msg);
+        const validationErrors = json?.errors || json?.error;
+        if (Array.isArray(validationErrors) && validationErrors.length) {
+          setShowerr(validationErrors[0].msg);
         } else {
-          setShowerr(json.error || "Registration failed.");
+          setShowerr(json?.error || "Registration failed.");
         }
       }
-     } catch (error) {
-        console.error("Registration Error:", error);
-        console.error("Error Message:", error.message);
-        console.error(error);
-      
-        setShowerr(error.message || "Unable to connect to server.");
-      }
+    } catch (error) {
+      console.error("Registration Error:", error);
+      setShowerr("Unable to connect to server. Please make sure the backend is running on port 8181.");
+    }
   };
 
   const resetForm = () => {

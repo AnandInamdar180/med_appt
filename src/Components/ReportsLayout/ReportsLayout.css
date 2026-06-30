@@ -1,0 +1,42 @@
+.reports-container {
+  width: 90%;
+  margin: 100px auto;
+}
+
+.reports-container h1 {
+  margin-bottom: 30px;
+  font-size: 42px;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.reports-table th {
+  background: #f3f3f3;
+  padding: 18px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.reports-table td {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+}
+
+.report-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.report-btn:hover {
+  background: #1976d2;
+}
