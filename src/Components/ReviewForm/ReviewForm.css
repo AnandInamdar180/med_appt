@@ -11,3 +11,79 @@
 .review-btn:hover {
   background-color: #1565c0;
 }
+
+.review-form-container {
+  width: 700px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.review-form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.review-form-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.review-form-container input,
+.review-form-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.review-form-container textarea {
+  resize: vertical;
+}
+
+.rating-container {
+  margin-bottom: 20px;
+}
+
+.star {
+  font-size: 35px;
+  cursor: pointer;
+  color: #bdbdbd;
+  margin-right: 8px;
+  transition: 0.2s;
+}
+
+.active-star {
+  color: gold;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.review-form-container button {
+  width: 100%;
+  padding: 12px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.review-form-container button:hover:not(:disabled) {
+  background: #1565c0;
+}
+
+.review-form-container button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
