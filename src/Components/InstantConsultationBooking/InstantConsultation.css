@@ -1,9 +1,9 @@
 .searchpage-container {
     max-width: 1200px;
     margin: auto;
-    margin-top:10%;
+    margin-top: 6rem;
     color: #414146;
-    padding: 0 20px;
+    padding: 0 20px 2.5rem;
     position: static;
     width: 100%;
 }
@@ -59,7 +59,47 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-top: 0.25rem;
+    margin-top: 2rem;
+}
+
+.instant-results-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dce6f5;
+    text-align: left;
+}
+
+.instant-speciality-label {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f2e63;
+    margin: 0.5rem 0 0.75rem;
+}
+
+.instant-results-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.booking-results-count {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f2e63;
+}
+
+.booking-results-speciality {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f2e63;
+    margin: 0.5rem 0;
+}
+
+.booking-results-copy {
+    color: #5f6f8d;
+    margin-bottom: 1rem;
 }
 
 .services-empty-state {

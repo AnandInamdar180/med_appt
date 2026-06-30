@@ -169,16 +169,16 @@
     justify-self: flex-end;
 }
 .home-search-container {
-    padding: 8px 0 12px;
+    padding: 8px 0 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-.finddoctor{
-    overflow: hidden;
-    padding: 0.25rem 1rem 0.75rem;
+.finddoctor {
+    overflow: visible;
+    padding: 0.25rem 1rem 1.5rem;
 } 
 .finddoctor-title {
     color: #0f2e63;
