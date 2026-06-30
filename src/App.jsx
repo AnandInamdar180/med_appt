@@ -8,6 +8,7 @@ import Sign_Up from "./Components/Sign_Up/Sign_Up";
 import InstantConsultation from "./Components/InstantConsultationBooking/InstantConsultation";
 import BookingConsultation from "./Components/BookingConsultation";
 import ReviewFormApp from "./Components/ReviewForm/ReviewFormApp";
+import ProfileCard from "./Components/ProfileCard/ProfileCard";
 
 function App() {
   return (
@@ -16,17 +17,30 @@ function App() {
         <Notification>
           <Routes>
             <Route path="/" element={<Landing_Page />} />
+
             <Route path="/login" element={<Login />} />
+
             <Route path="/signup" element={<Sign_Up />} />
+
             <Route
               path="/instant-consultation"
               element={<InstantConsultation />}
             />
+
             <Route
               path="/booking-consultation"
               element={<BookingConsultation />}
             />
-            <Route path="/reviews" element={<ReviewFormApp />} />
+
+            <Route
+              path="/reviews"
+              element={<ReviewFormApp />}
+            />
+
+            <Route
+              path="/profile"
+              element={<ProfileCard />}
+            />
           </Routes>
         </Notification>
       </BrowserRouter>

@@ -163,3 +163,41 @@ nav {
     }
 
 }
+/* ===========================
+   Profile Dropdown
+=========================== */
+
+.profile-dropdown {
+    padding: 10px 16px;
+    border: 2px solid #3685fb;
+    border-radius: 50px;
+    background: #ffffff;
+    color: #0d213f;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.profile-dropdown:hover {
+    border-color: #1565c0;
+    background: #f5f9ff;
+}
+
+.profile-dropdown:focus {
+    border-color: #1565c0;
+}
+
+.profile-dropdown option {
+    color: #0d213f;
+    background: white;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .profile-dropdown {
+        width: 180px;
+        text-align: center;
+    }
+}
