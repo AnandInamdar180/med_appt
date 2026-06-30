@@ -7,6 +7,9 @@ import Login from "./Components/Login/Login";
 import Sign_Up from "./Components/Sign_Up/Sign_Up";
 import InstantConsultation from "./Components/InstantConsultationBooking/InstantConsultation";
 import BookingConsultation from "./Components/BookingConsultation";
+import BestServices from "./Components/BestServices/BestServices";
+import ServiceDetail from "./Components/ServiceDetail/ServiceDetail";
+import HealthBlog from "./Components/HealthBlog/HealthBlog";
 import ReviewFormApp from "./Components/ReviewForm/ReviewFormApp";
 import ProfileCard from "./Components/ProfileCard/ProfileCard";
 import ReportsLayout from "./Components/ReportsLayout/ReportsLayout";
@@ -31,6 +34,21 @@ function App() {
             <Route
               path="/booking-consultation"
               element={<BookingConsultation />}
+            />
+
+            <Route
+              path="/services"
+              element={<BestServices />}
+            />
+
+            <Route
+              path="/service/:slug"
+              element={<ServiceDetail />}
+            />
+
+            <Route
+              path="/health-blog"
+              element={<HealthBlog />}
             />
 
             <Route

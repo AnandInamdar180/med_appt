@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ReviewForm.css";
 
-const GiveReviews = ({ onSubmit }) => {
+const GiveReviews = ({
+  onSubmit,
+  doctorName,
+  doctorSpeciality,
+  initialName = "",
+  submittedReview,
+}) => {
   const [formData, setFormData] = useState({
-    name: "",
+    name: initialName,
     review: "",
     rating: 0,
   });
 
-  const [submitted, setSubmitted] = useState(false);
   const [warning, setWarning] = useState("");
+
+  useEffect(() => {
+    setFormData({
+      name: submittedReview?.name || initialName,
+      review: submittedReview?.review || "",
+      rating: submittedReview?.rating || 0,
+    });
+    setWarning("");
+  }, [doctorName, initialName, submittedReview]);
 
   const handleChange = (e) => {
     setFormData({
@@ -42,13 +56,14 @@ const GiveReviews = ({ onSubmit }) => {
     if (onSubmit) {
       onSubmit(formData);
     }
-
-    setSubmitted(true);
   };
 
   return (
     <div className="review-form-container">
       <h2>Give Your Review</h2>
+      <p className="review-form-subtitle">
+        Reviewing {doctorName} · {doctorSpeciality}
+      </p>
 
       {warning && <p className="warning">{warning}</p>}
 
@@ -87,9 +102,7 @@ const GiveReviews = ({ onSubmit }) => {
           ))}
         </div>
 
-        <button type="submit" disabled={submitted}>
-          {submitted ? "Review Submitted" : "Submit"}
-        </button>
+        <button type="submit">Submit Review</button>
       </form>
     </div>
   );

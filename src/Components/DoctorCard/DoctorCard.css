@@ -1,13 +1,25 @@
 .doctor-card-container {
   width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #dbe5f4;
+  border-radius: 18px;
   overflow: hidden;
   display: inline-block;
   margin: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 18px 38px rgba(15, 46, 99, 0.08);
   background: #fff;
+}
+
+.doctor-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 15px;
+  color: #0f2e63;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .doctor-card-details-container {
@@ -16,7 +28,6 @@
 
 .doctor-card-profile-image-container {
   text-align: center;
-  margin-bottom: 15px;
 }
 
 .doctor-card-profile-image-container img {
@@ -33,6 +44,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #0f2e63;
 }
 
 .doctor-card-detail-speciality {
@@ -53,10 +65,14 @@
   margin-bottom: 15px;
 }
 
+.doctor-card-stars {
+  color: #f7c948;
+}
+
 /* Fixed class name */
 .book-appointment-btn {
   width: 100%;
-  background-color: #2196f3;
+  background: linear-gradient(135deg, #0f2e63 0%, #2464c5 100%);
   color: white;
   border: none;
   padding: 12px;
@@ -67,7 +83,7 @@
 }
 
 .book-appointment-btn:hover {
-  background-color: #0d8af5;
+  background: linear-gradient(135deg, #0d2753 0%, #1f57af 100%);
 }
 
 .book-appointment-btn div:last-child {
@@ -76,19 +92,35 @@
 }
 
 .cancel-appointment {
-  background-color: #f44336;
+  background: #f44336;
 }
 
 .cancel-appointment:hover {
-  background-color: #d32f2f;
+  background: #d32f2f;
 }
 
 .bookedInfo {
   margin-top: 15px;
   padding: 15px;
-  border-radius: 6px;
-  background: #f8f8f8;
-  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: #f7faff;
+  border: 1px solid #dbe5f4;
+  text-align: left;
+}
+
+.bookedInfo h3 {
+  color: #0f2e63;
+  margin-bottom: 0.8rem;
+}
+
+.bookedInfo-cancel {
+  margin-top: 1rem;
+  width: 100%;
+  background: #f44336;
+}
+
+.bookedInfo-cancel:hover {
+  background: #d32f2f;
 }
 
 .appointment-form {

@@ -1,30 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DoctorCard.css";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import { APPOINTMENT_STORAGE_KEY } from "../../data/doctorData";
 
 const DoctorCard = ({
+  id,
   name,
   speciality,
   experience,
   ratings,
   profilePic,
+  avatarColor = "#edf4ff",
 }) => {
   const [showForm, setShowForm] = useState(false);
   const [appointment, setAppointment] = useState(null);
 
+  useEffect(() => {
+    const storedAppointment = JSON.parse(
+      localStorage.getItem(APPOINTMENT_STORAGE_KEY)
+    );
+
+    if (storedAppointment?.doctorId === id) {
+      setAppointment(storedAppointment);
+    }
+  }, [id]);
+
   const handleSubmit = (appointmentData) => {
-    setAppointment(appointmentData);
+    const nextAppointment = {
+      ...appointmentData,
+      doctorId: id,
+      doctorName: name,
+      doctorSpeciality: speciality,
+    };
+
+    localStorage.setItem(
+      APPOINTMENT_STORAGE_KEY,
+      JSON.stringify(nextAppointment)
+    );
+    window.dispatchEvent(new Event("appointment-updated"));
+    setAppointment(nextAppointment);
     setShowForm(false);
   };
 
   const handleCancel = () => {
+    localStorage.removeItem(APPOINTMENT_STORAGE_KEY);
+    window.dispatchEvent(new Event("appointment-updated"));
     setAppointment(null);
   };
+
+  const initials = name
+    .replace("Dr. ", "")
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+
+  const ratingStars =
+    "★".repeat(ratings) + "☆".repeat(Math.max(0, 5 - ratings));
 
   return (
     <div className="doctor-card-container">
       <div className="doctor-card-details-container">
-        <div className="doctor-card-profile-image-container">
+        <div
+          className="doctor-card-profile-image-container doctor-avatar"
+          style={{ backgroundColor: avatarColor }}
+        >
           {profilePic ? (
             <img
               src={profilePic}
@@ -32,15 +72,7 @@ const DoctorCard = ({
               className="doctor-profile-image"
             />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="46"
-              height="46"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-            </svg>
+            <span>{initials}</span>
           )}
         </div>
 
@@ -56,7 +88,7 @@ const DoctorCard = ({
           </div>
 
           <div className="doctor-card-detail-consultationfees">
-            Ratings: {ratings}
+            Ratings: <span className="doctor-card-stars">{ratingStars}</span>
           </div>
 
           {!appointment ? (
@@ -105,6 +137,14 @@ const DoctorCard = ({
           <p>
             <strong>Time:</strong> {appointment.appointmentTime}
           </p>
+
+          <button
+            type="button"
+            className="bookedInfo-cancel"
+            onClick={handleCancel}
+          >
+            Cancel Appointment
+          </button>
         </div>
       )}
     </div>

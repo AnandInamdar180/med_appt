@@ -1,26 +1,27 @@
 import React from "react";
 import "./ReviewForm.css";
 
-const ReviewForm = ({ doctorName, doctorSpeciality, onReviewClick }) => {
+const ReviewForm = ({
+  doctorName,
+  doctorSpeciality,
+  onReviewClick,
+  review,
+  isActive,
+}) => {
   return (
-    <tr>
-      <td>1</td>
+    <div className={`review-card ${isActive ? "review-card--active" : ""}`}>
+      <div>
+        <h3>{doctorName}</h3>
+        <p>{doctorSpeciality}</p>
+        <span className="review-status">
+          {review ? `Reviewed: ${review.rating}/5` : "Not reviewed yet"}
+        </span>
+      </div>
 
-      <td>{doctorName}</td>
-
-      <td>{doctorSpeciality}</td>
-
-      <td>
-        <button
-          className="review-btn"
-          onClick={onReviewClick}
-        >
-          Click Here
-        </button>
-      </td>
-
-      <td>Not Reviewed</td>
-    </tr>
+      <button className="review-btn" onClick={onReviewClick}>
+        {review ? "Edit Review" : "Write Review"}
+      </button>
+    </div>
   );
 };
 

@@ -4,11 +4,14 @@ import "./ProfileCard.css";
 
 const ProfileCard = () => {
   const navigate = useNavigate();
+  const storedName = sessionStorage.getItem("name") || "Patient";
+  const storedPhone = sessionStorage.getItem("phone") || "1234567890";
+  const storedEmail = sessionStorage.getItem("email") || "patient@example.com";
 
   const [userDetails, setUserDetails] = useState({
-    name: "Peter",
-    phone: "1234567890",
-    email: "peter@gmail.com",
+    name: storedName,
+    phone: storedPhone,
+    email: storedEmail,
   });
 
   const [updatedDetails, setUpdatedDetails] = useState(userDetails);
@@ -29,6 +32,9 @@ const ProfileCard = () => {
     e.preventDefault();
 
     setUserDetails(updatedDetails);
+    sessionStorage.setItem("name", updatedDetails.name);
+    sessionStorage.setItem("phone", updatedDetails.phone);
+    sessionStorage.setItem("email", updatedDetails.email);
     setEditMode(false);
 
     alert("Profile Updated Successfully!");
@@ -42,72 +48,88 @@ const ProfileCard = () => {
 
   return (
     <div className="profile-page">
-      <div className="profile-header">
-        <h2>Welcome, {userDetails.name}</h2>
+      <div className="profile-shell">
+        <div className="profile-header">
+          <div>
+            <p className="profile-eyebrow">Your Profile</p>
+            <h2>Welcome, {userDetails.name}</h2>
+          </div>
 
-        <button className="logout-btn" onClick={logout}>
-          Logout
-        </button>
-      </div>
+          <button className="logout-btn" onClick={logout}>
+            Logout
+          </button>
+        </div>
 
-      <div className="profile-card">
-        {editMode ? (
-          <form onSubmit={handleSubmit}>
-            <label>
-              Name
-              <input
-                type="text"
-                name="name"
-                value={updatedDetails.name}
-                onChange={handleInputChange}
-              />
-            </label>
+        <div className="profile-content">
+          <div className="profile-summary">
+            <div className="profile-avatar">
+              {userDetails.name.charAt(0).toUpperCase()}
+            </div>
+            <h3>{userDetails.name}</h3>
+            <p>{userDetails.email}</p>
+            <span>{userDetails.phone}</span>
+          </div>
 
-            <label>
-              Phone
-              <input
-                type="text"
-                name="phone"
-                value={updatedDetails.phone}
-                onChange={handleInputChange}
-              />
-            </label>
+          <div className="profile-card">
+            {editMode ? (
+              <form onSubmit={handleSubmit}>
+                <label>
+                  Name
+                  <input
+                    type="text"
+                    name="name"
+                    value={updatedDetails.name}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-            <label>
-              Email
-              <input
-                type="email"
-                name="email"
-                value={updatedDetails.email}
-                onChange={handleInputChange}
-              />
-            </label>
+                <label>
+                  Phone
+                  <input
+                    type="text"
+                    name="phone"
+                    value={updatedDetails.phone}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-            <button type="submit" className="save-btn">
-              Save
-            </button>
-          </form>
-        ) : (
-          <>
-            <h3>Your Profile</h3>
+                <label>
+                  Email
+                  <input
+                    type="email"
+                    name="email"
+                    value={updatedDetails.email}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-            <p>
-              <b>Name:</b> {userDetails.name}
-            </p>
+                <button type="submit" className="save-btn">
+                  Save
+                </button>
+              </form>
+            ) : (
+              <>
+                <h3>Account Details</h3>
 
-            <p>
-              <b>Email:</b> {userDetails.email}
-            </p>
+                <p>
+                  <b>Name:</b> {userDetails.name}
+                </p>
 
-            <p>
-              <b>Phone:</b> {userDetails.phone}
-            </p>
+                <p>
+                  <b>Email:</b> {userDetails.email}
+                </p>
 
-            <button className="edit-btn" onClick={handleEdit}>
-              Edit
-            </button>
-          </>
-        )}
+                <p>
+                  <b>Phone:</b> {userDetails.phone}
+                </p>
+
+                <button className="edit-btn" onClick={handleEdit}>
+                  Edit
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

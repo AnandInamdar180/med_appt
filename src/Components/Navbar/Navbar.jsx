@@ -7,9 +7,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const token = sessionStorage.getItem("auth-token");
-  const email = sessionStorage.getItem("email");
-
-  const username = email ? email.split("@")[0] : "Profile";
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -19,33 +16,6 @@ const Navbar = () => {
     sessionStorage.clear();
     navigate("/");
     window.location.reload();
-  };
-
-  const handleDropdown = (e) => {
-    const value = e.target.value;
-
-    switch (value) {
-      case "profile":
-        navigate("/profile");
-        break;
-
-      case "reports":
-        navigate("/reports");
-        break;
-
-      case "reviews":
-        navigate("/reviews");
-        break;
-
-      case "logout":
-        logout();
-        break;
-
-      default:
-        break;
-    }
-
-    e.target.selectedIndex = 0;
   };
 
   return (
@@ -84,7 +54,15 @@ const Navbar = () => {
         </li>
 
         <li className="link">
-          <Link to="/booking-consultation">Appointments</Link>
+          <Link to="/services">Appointments</Link>
+        </li>
+
+        <li className="link">
+          <Link to="/health-blog">Health Blog</Link>
+        </li>
+
+        <li className="link">
+          <Link to="/reviews">Reviews</Link>
         </li>
 
         {!token ? (
@@ -102,22 +80,21 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          <li className="link">
-            <select
-              className="profile-dropdown"
-              defaultValue=""
-              onChange={handleDropdown}
-            >
-              <option value="" disabled>
-                {username}
-              </option>
+          <>
+            <li className="link">
+              <Link to="/profile">Profile</Link>
+            </li>
 
-              <option value="profile">Your Profile</option>
-              <option value="reports">Your Reports</option>
-              <option value="reviews">Reviews</option>
-              <option value="logout">Logout</option>
-            </select>
-          </li>
+            <li className="link">
+              <Link to="/reports">Reports</Link>
+            </li>
+
+            <li className="link">
+              <button className="btn1 nav-logout" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>

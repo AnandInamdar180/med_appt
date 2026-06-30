@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [name, setName] = useState(sessionStorage.getItem("name") || "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    sessionStorage.getItem("phone") || ""
+  );
   const [appointmentDate, setAppointmentDate] = useState("");
   const [appointmentTime, setAppointmentTime] = useState("");
 
@@ -14,10 +16,10 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
       phoneNumber,
       appointmentDate,
       appointmentTime,
+      doctorName,
+      doctorSpeciality,
     });
 
-    setName("");
-    setPhoneNumber("");
     setAppointmentDate("");
     setAppointmentTime("");
   };
@@ -57,6 +59,7 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
           type="date"
           id="appointmentDate"
           value={appointmentDate}
+          min={new Date().toISOString().split("T")[0]}
           onChange={(e) => setAppointmentDate(e.target.value)}
           required
         />

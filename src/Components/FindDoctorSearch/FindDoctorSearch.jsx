@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import "./FindDoctorSearch.css";
 import { useNavigate } from "react-router-dom";
-
-const initSpeciality = [
-  "Dentist",
-  "Gynecologist/Obstetrician",
-  "General Physician",
-  "Dermatologist",
-  "Ear-Nose-Throat (ENT) Specialist",
-  "Homeopath",
-  "Ayurveda",
-];
+import { specialityOptions } from "../../data/doctorData";
 
 const FindDoctorSearch = () => {
   const [doctorResultHidden, setDoctorResultHidden] = useState(true);
   const [searchDoctor, setSearchDoctor] = useState("");
-  const [specialities] = useState(initSpeciality);
+  const [specialities] = useState(specialityOptions);
 
   const navigate = useNavigate();
 
@@ -30,12 +21,14 @@ const FindDoctorSearch = () => {
   return (
     <div className="finddoctor">
       <center>
-        <h1>Find a Doctor and Book Appointment</h1>
+        <h1 className="finddoctor-title">
+          Find a Doctor and Book Appointment
+        </h1>
 
         <div>
           <i
             className="fa fa-user-md"
-            style={{ color: "#000000", fontSize: "3rem" }}
+            style={{ color: "#0f2e63", fontSize: "3rem" }}
           ></i>
         </div>
 

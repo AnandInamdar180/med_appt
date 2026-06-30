@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./LandingPage.css";
 
 const Landing_Page = () => {
@@ -7,10 +8,8 @@ const Landing_Page = () => {
       <div>
         <div data-aos="fade-up" className="flex-hero">
           <h1>
-            Your Health <br />
-            <span className="text-gradient">
-              Our Responsibility
-            </span>
+            <span className="hero-primary">Your Health</span> <br />
+            <span className="text-gradient">Our Responsibility</span>
           </h1>
 
           <div className="blob-cont">
@@ -22,16 +21,18 @@ const Landing_Page = () => {
           </div>
 
           <h4>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Eaque at quae ducimus. Suscipit omnis quibusdam non cum rem
-            voluptatem!
+            Embrace the art of self-care, for a healthy mind and body
+            forge the foundation of a vibrant life. Wellness is not just
+            a destination; it's a journey of mindful choices and daily
+            transformations. Nurture your health with love, and watch it
+            bloom into a beacon of joy and vitality.
           </h4>
 
-          <a href="#services">
-            <button className="button">
+          <Link to="/services">
+            <button className="button" type="button">
               Get Started
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
