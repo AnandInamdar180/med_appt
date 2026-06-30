@@ -28,5 +28,15 @@
     "phone": "1324569870",
     "createdAt": "2026-06-30T11:29:05.970Z",
     "updatedAt": "2026-06-30T11:29:05.970Z"
+  },
+  {
+    "id": "a88ff16b-4eb7-45e5-9318-e4e03781bd25",
+    "role": "Patient",
+    "email": "anandinamdar03@gmail.com",
+    "name": "anand",
+    "password": "$2a$10$TD0zDyIteMFGgNm5TtpTH.IavfTVG.2Fd4Gyz.2Oa9g60Xk2COnTW",
+    "phone": "1234567890",
+    "createdAt": "2026-06-30T13:41:04.387Z",
+    "updatedAt": "2026-06-30T13:41:04.387Z"
   }
 ]

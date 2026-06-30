@@ -15,14 +15,6 @@ const reports = [
 ];
 
 const ReportsLayout = () => {
-  const viewReport = (doctor) => {
-    alert(`Viewing report of ${doctor}`);
-  };
-
-  const downloadReport = (doctor) => {
-    alert(`Downloading report of ${doctor}`);
-  };
-
   return (
     <div className="reports-container">
       <h1>Reports</h1>
@@ -48,21 +40,26 @@ const ReportsLayout = () => {
               <td>{report.speciality}</td>
 
               <td>
-                <button
-                  className="report-btn"
-                  onClick={() => viewReport(report.doctor)}
+                <a
+                  href="/patient_report.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  View Report
-                </button>
+                  <button className="report-btn">
+                    View Report
+                  </button>
+                </a>
               </td>
 
               <td>
-                <button
-                  className="report-btn"
-                  onClick={() => downloadReport(report.doctor)}
+                <a
+                  href="/patient_report.pdf"
+                  download="patient_report.pdf"
                 >
-                  Download Report
-                </button>
+                  <button className="report-btn">
+                    Download Report
+                  </button>
+                </a>
               </td>
             </tr>
           ))}
